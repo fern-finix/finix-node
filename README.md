@@ -8,12 +8,37 @@ API documentation is available at <https://finix.com/docs/api/overview/>.
 
 ## Usage
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](TODO)
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/edit/typescript-example-using-sdk-built-with-fern-bsmt1v?file=app.ts&view=editor)
 
 ```typescript
-import { TODO } from "TODO";
+import { FinixApi, FinixApiClient } from '@fern-api/finix';
+import { Environment } from '@fern-api/finix/environments';
 
-const TODO
+const client = new FinixApiClient({
+  environment: Environment.Sandbox,
+  auth: {
+    credentials: {
+      username: 'YOUR_USERNAME',
+      password: 'YOUR_PASSWORD',
+    },
+  },
+});
+
+const response = await client.identities.create(
+  FinixApi.identities.CreateIdentityRequest.buyer({
+    entity: {
+      phone: '7145677613',
+      firstName: 'John',
+      lastName: 'Smith',
+      email: 'finix_example@finix.com',
+    },
+    tags: {},
+  })
+);
+
+console.log('Received response from Finix!', response);
+}
+
 ```
 
 ## Beta status
