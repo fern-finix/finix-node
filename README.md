@@ -1,10 +1,10 @@
-# {Company} Node Library
+# Finix Node Library
 
-[![npm shield](https://img.shields.io/npm/v/@fern-api/{company})](https://www.npmjs.com/package/@fern-api/{company})
+[![npm shield](https://img.shields.io/npm/v/@fern-api/finix)](https://www.npmjs.com/package/@fern-api/finix)
 
 ## Documentation
 
-API documentation is available at <{docs_url}>.
+API documentation is available at <https://finix.com/docs/api/overview/>.
 
 ## Usage
 
