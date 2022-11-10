@@ -34,9 +34,117 @@ export class Client {
     if (response.ok) {
       return {
         ok: true,
-        body: serializers.identities.CreateIdentityResponse.parse(
-          response.body as serializers.identities.CreateIdentityResponse.Raw
-        ),
+        body: serializers.identities.Identity.parse(response.body as serializers.identities.Identity.Raw),
+      };
+    }
+
+    return {
+      ok: false,
+      error: {
+        errorName: undefined,
+        content: response.error,
+        _visit: (visitor) => visitor._other(response.error),
+      },
+    };
+  }
+
+  public async list(): Promise<FinixApi.identities.list.Response> {
+    const response = await core.fetcher({
+      url: urlJoin(this.options.environment ?? environments.Environment.Production, "/identities/"),
+      method: "GET",
+      headers: {
+        Authorization: core.BasicAuth.toAuthorizationHeader(await core.Supplier.get(this.options.auth?.credentials)),
+      },
+    });
+    if (response.ok) {
+      return {
+        ok: true,
+        body: serializers.identities.list.Response.parse(response.body as serializers.identities.Identity.Raw[]),
+      };
+    }
+
+    return {
+      ok: false,
+      error: {
+        errorName: undefined,
+        content: response.error,
+        _visit: (visitor) => visitor._other(response.error),
+      },
+    };
+  }
+
+  public async fetch(request: FinixApi.identities.fetch.Request): Promise<FinixApi.identities.fetch.Response> {
+    const response = await core.fetcher({
+      url: urlJoin(
+        this.options.environment ?? environments.Environment.Production,
+        `/identities/${request.identityId}`
+      ),
+      method: "GET",
+      headers: {
+        Authorization: core.BasicAuth.toAuthorizationHeader(await core.Supplier.get(this.options.auth?.credentials)),
+      },
+    });
+    if (response.ok) {
+      return {
+        ok: true,
+        body: serializers.identities.Identity.parse(response.body as serializers.identities.Identity.Raw),
+      };
+    }
+
+    return {
+      ok: false,
+      error: {
+        errorName: undefined,
+        content: response.error,
+        _visit: (visitor) => visitor._other(response.error),
+      },
+    };
+  }
+
+  public async update(request: FinixApi.identities.update.Request): Promise<FinixApi.identities.update.Response> {
+    const response = await core.fetcher({
+      url: urlJoin(
+        this.options.environment ?? environments.Environment.Production,
+        `/identities/${request.identityId}/verifications`
+      ),
+      method: "PUT",
+      headers: {
+        Authorization: core.BasicAuth.toAuthorizationHeader(await core.Supplier.get(this.options.auth?.credentials)),
+      },
+      body: serializers.identities.Identity.json(request._body),
+    });
+    if (response.ok) {
+      return {
+        ok: true,
+        body: serializers.identities.Identity.parse(response.body as serializers.identities.Identity.Raw),
+      };
+    }
+
+    return {
+      ok: false,
+      error: {
+        errorName: undefined,
+        content: response.error,
+        _visit: (visitor) => visitor._other(response.error),
+      },
+    };
+  }
+
+  public async verify(request: FinixApi.identities.verify.Request): Promise<FinixApi.identities.verify.Response> {
+    const response = await core.fetcher({
+      url: urlJoin(
+        this.options.environment ?? environments.Environment.Production,
+        `/identities/${request.identityId}/verifications`
+      ),
+      method: "POST",
+      headers: {
+        Authorization: core.BasicAuth.toAuthorizationHeader(await core.Supplier.get(this.options.auth?.credentials)),
+      },
+    });
+    if (response.ok) {
+      return {
+        ok: true,
+        body: serializers.identities.Identity.parse(response.body as serializers.identities.Identity.Raw),
       };
     }
 

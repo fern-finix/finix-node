@@ -4,13 +4,9 @@
 
 import { FinixApi } from "../../..";
 
-export type CreateIdentityResponse =
-  | CreateIdentityResponse.Merchant
-  | CreateIdentityResponse.Buyer
-  | CreateIdentityResponse.Associated
-  | CreateIdentityResponse._Unknown;
+export type Identity = Identity.Merchant | Identity.Buyer | Identity.Associated | Identity._Unknown;
 
-export declare namespace CreateIdentityResponse {
+export declare namespace Identity {
   interface Merchant extends FinixApi.identities.MerchantResponse, _Utils {
     type: "merchant";
   }
@@ -28,7 +24,7 @@ export declare namespace CreateIdentityResponse {
   }
 
   interface _Utils {
-    _visit: <Result>(visitor: CreateIdentityResponse._Visitor<Result>) => Result;
+    _visit: <Result>(visitor: Identity._Visitor<Result>) => Result;
   }
 
   interface _Visitor<Result> {
@@ -39,9 +35,9 @@ export declare namespace CreateIdentityResponse {
   }
 }
 
-export const CreateIdentityResponse = {
-  merchant: (value: FinixApi.identities.MerchantResponse): CreateIdentityResponse.Merchant => {
-    const valueWithoutVisit: Omit<CreateIdentityResponse.Merchant, "_visit"> = {
+export const Identity = {
+  merchant: (value: FinixApi.identities.MerchantResponse): Identity.Merchant => {
+    const valueWithoutVisit: Omit<Identity.Merchant, "_visit"> = {
       ...value,
       type: "merchant",
     };
@@ -49,13 +45,13 @@ export const CreateIdentityResponse = {
       enumerable: false,
       writable: true,
     });
-    const castedValue = valueWithoutVisit as CreateIdentityResponse.Merchant;
+    const castedValue = valueWithoutVisit as Identity.Merchant;
     castedValue._visit = (visitor) => visitor.merchant(value);
     return castedValue;
   },
 
-  buyer: (value: FinixApi.identities.BuyerResponse): CreateIdentityResponse.Buyer => {
-    const valueWithoutVisit: Omit<CreateIdentityResponse.Buyer, "_visit"> = {
+  buyer: (value: FinixApi.identities.BuyerResponse): Identity.Buyer => {
+    const valueWithoutVisit: Omit<Identity.Buyer, "_visit"> = {
       ...value,
       type: "buyer",
     };
@@ -63,13 +59,13 @@ export const CreateIdentityResponse = {
       enumerable: false,
       writable: true,
     });
-    const castedValue = valueWithoutVisit as CreateIdentityResponse.Buyer;
+    const castedValue = valueWithoutVisit as Identity.Buyer;
     castedValue._visit = (visitor) => visitor.buyer(value);
     return castedValue;
   },
 
-  associated: (value: FinixApi.identities.AssociatedResponse): CreateIdentityResponse.Associated => {
-    const valueWithoutVisit: Omit<CreateIdentityResponse.Associated, "_visit"> = {
+  associated: (value: FinixApi.identities.AssociatedResponse): Identity.Associated => {
+    const valueWithoutVisit: Omit<Identity.Associated, "_visit"> = {
       ...value,
       type: "associated",
     };
@@ -77,7 +73,7 @@ export const CreateIdentityResponse = {
       enumerable: false,
       writable: true,
     });
-    const castedValue = valueWithoutVisit as CreateIdentityResponse.Associated;
+    const castedValue = valueWithoutVisit as Identity.Associated;
     castedValue._visit = (visitor) => visitor.associated(value);
     return castedValue;
   },

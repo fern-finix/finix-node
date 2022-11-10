@@ -4,7 +4,7 @@ export * from "./AdditionalUnderwritingData";
 export * from "./BuyerRequest";
 export * from "./Entity";
 export * from "./Tags";
-export * from "./CreateIdentityResponse";
+export * from "./Identity";
 export * from "./BuyerResponse";
 export * from "./AssociatedResponse";
 export * from "./Address";

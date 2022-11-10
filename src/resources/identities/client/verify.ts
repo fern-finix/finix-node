@@ -5,7 +5,11 @@
 import { FinixApi } from "../../..";
 import * as core from "../../../core";
 
-export type Response = core.APIResponse<FinixApi.identities.Identity, FinixApi.identities.create.Error>;
+export interface Request {
+  identityId: string;
+}
+
+export type Response = core.APIResponse<FinixApi.identities.Identity, FinixApi.identities.verify.Error>;
 export type Error = Error._Unknown;
 
 export declare namespace Error {

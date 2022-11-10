@@ -6,26 +6,23 @@ import { FinixApi } from "../../..";
 import * as core from "../../../core";
 import * as serializers from "../..";
 
-export const CreateIdentityResponse: core.schemas.Schema<
-  CreateIdentityResponse.Raw,
-  FinixApi.identities.CreateIdentityResponse
-> = core.schemas
+export const Identity: core.schemas.Schema<Identity.Raw, FinixApi.identities.Identity> = core.schemas
   .union("type", {
     merchant: core.schemas.lazyObject(() => serializers.identities.MerchantResponse),
     buyer: core.schemas.lazyObject(() => serializers.identities.BuyerResponse),
     associated: core.schemas.lazyObject(() => serializers.identities.AssociatedResponse),
   })
-  .transform<FinixApi.identities.CreateIdentityResponse>({
+  .transform<FinixApi.identities.Identity>({
     parse: (value) => {
       switch (value.type) {
         case "merchant": {
-          return FinixApi.identities.CreateIdentityResponse.merchant(value);
+          return FinixApi.identities.Identity.merchant(value);
         }
         case "buyer": {
-          return FinixApi.identities.CreateIdentityResponse.buyer(value);
+          return FinixApi.identities.Identity.buyer(value);
         }
         case "associated": {
-          return FinixApi.identities.CreateIdentityResponse.associated(value);
+          return FinixApi.identities.Identity.associated(value);
         }
         default: {
           return {
@@ -38,8 +35,8 @@ export const CreateIdentityResponse: core.schemas.Schema<
     json: (value) => value as any,
   });
 
-export declare namespace CreateIdentityResponse {
-  type Raw = CreateIdentityResponse.Merchant | CreateIdentityResponse.Buyer | CreateIdentityResponse.Associated;
+export declare namespace Identity {
+  type Raw = Identity.Merchant | Identity.Buyer | Identity.Associated;
 
   interface Merchant extends serializers.identities.MerchantResponse.Raw {
     type: "merchant";
